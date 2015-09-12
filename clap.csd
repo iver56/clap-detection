@@ -17,10 +17,14 @@ instr 1
 	kLastAttack init 0
 	iRmsDiffThreshold init .1
 	
+	kTime times
+	
 	aIn in
 	
 	kRmsOrig rms aIn
-	kSmoothRms tonek kRmsOrig, 0.01
+	
+	kSmoothingFreq linseg 5, 1, 0.01 ;quicker smoothing to start with
+	kSmoothRms tonek kRmsOrig, kSmoothingFreq
 	kSmoothRms max kSmoothRms, 0.0001
 	
 	aNorm = 0.1 * aIn / a(kSmoothRms)
@@ -28,9 +32,7 @@ instr 1
 	kRms rms aNorm
 	kRmsDiff = kRms - kLastRms
 	
-	kTime times
-	
-	if (kRmsDiff > iRmsDiffThreshold && kTime - kLastAttack > 0.05) then
+	if (kRmsDiff > iRmsDiffThreshold && kTime - kLastAttack > 0.09) then
 		kLastAttack times
 		pyrun "print 'clap detected', time.time()"
 	endif
