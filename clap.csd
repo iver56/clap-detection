@@ -15,13 +15,18 @@ instr 1
 	pyruni "import time"
 	kLastRms init 0
 	kLastAttack init 0
-	iRmsDiffThreshold init .0002
+	iRmsDiffThreshold init .1
 	
 	aIn in
-	kRms rms aIn
-	kRmsDiff = kRms - kLastRms
 	
-	kSmoothRms tonek kRms, 0.01
+	kRmsOrig rms aIn
+	kSmoothRms tonek kRmsOrig, 0.01
+	kSmoothRms max kSmoothRms, 0.0001
+	
+	aNorm = 0.1 * aIn / a(kSmoothRms)
+	
+	kRms rms aNorm
+	kRmsDiff = kRms - kLastRms
 	
 	kTime times
 	
@@ -29,20 +34,8 @@ instr 1
 		kLastAttack times
 		pyrun "print 'clap detected', time.time()"
 	endif
-	
-	printk2 kLastAttack
-	
-	aIn = 0.1 * aIn / a(kSmoothRms)
 
-	;if (kRatio < 0.5) then
-		;TODO: check time since last transient (attack)
-	;	kLastDescent times
-	;endif
-
-	;printk2 kRms
-	;printks "lastattack", 0.01, kLastAttack
-
-	out aIn
+	out aNorm
 	kLastRms = kRms
 endin
 </CsInstruments>
