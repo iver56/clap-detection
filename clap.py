@@ -14,9 +14,13 @@ class ClapAnalyzer:
         self.deviation_threshold = deviation_threshold
         self.current_index = 0
         self.clap_listeners = set()
+        self.clap_sequence_listeners = set()
 
     def on_clap(self, fn):
         self.clap_listeners.add(fn)
+
+    def on_clap_sequence(self, fn):
+        self.clap_sequence_listeners.add(fn)
 
     def clap(self, time):
         """
@@ -24,6 +28,9 @@ class ClapAnalyzer:
         :param time: Number of seconds since the program started running. Must be float.
         :return:
         """
+        for fn in self.clap_listeners:
+            fn()
+
         self.current_index = self.wrap_around(self.current_index + 1)
         self.clap_times[self.current_index] = time
 
@@ -43,7 +50,7 @@ class ClapAnalyzer:
                 j += 1
 
             if total_deviation < self.deviation_threshold:
-                for fn in self.clap_listeners:
+                for fn in self.clap_sequence_listeners:
                     fn()
                 return  # clap sequence detected!
             else:
