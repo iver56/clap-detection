@@ -31,7 +31,7 @@ clap_analyzer.on_clap(clap_detected)
 
 Some examples of things you can have your Raspberry Pi do when a matching clap sequence is detected:
 
--Dim the lights and start playing smooth jazz music
--Turn on/off the TV
--Broadcast a yo
--Project the weather forecast on the wall
+* Dim the lights and start playing smooth jazz music
+* Turn on/off the TV
+* Broadcast a yo
+* Project the weather forecast on the wall
