@@ -31,7 +31,7 @@ instr 1
 	
 	kSmoothingFreq linseg 5, 1, 0.01 ;quicker smoothing to start with
 	kSmoothRms tonek kRmsOrig, kSmoothingFreq
-	kSmoothRms max kSmoothRms, 0.0001
+	kSmoothRms max kSmoothRms, 0.001
 	
 	aNorm = 0.1 * aIn / a(kSmoothRms)
 	;aNorm butterbp aNorm, 12500, 2500
