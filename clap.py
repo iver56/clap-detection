@@ -13,6 +13,10 @@ class ClapAnalyzer:
         self.clap_times = [None] * self.buffer_size
         self.deviation_threshold = deviation_threshold
         self.current_index = 0
+        self.clap_listeners = set()
+
+    def on_clap(self, fn):
+        self.clap_listeners.add(fn)
 
     def clap(self, time):
         """
@@ -25,7 +29,7 @@ class ClapAnalyzer:
 
         first_clap_in_sequence = self.clap_times[self.current_index - self.buffer_size + 1]
         if first_clap_in_sequence is None:
-            return False  # waiting for more claps
+            return  # waiting for more claps
 
         time_diff = time - first_clap_in_sequence
         avg_time_per_clap_unit = time_diff / self.pattern_sum
@@ -39,11 +43,13 @@ class ClapAnalyzer:
                 j += 1
 
             if total_deviation < self.deviation_threshold:
-                return True  # clap sequence detected!
+                for fn in self.clap_listeners:
+                    fn()
+                return  # clap sequence detected!
             else:
-                return False  # clap sequence didn't match accurately enough with the pattern
+                return  # clap sequence didn't match accurately enough with the pattern
         else:
-            return False  # clap sequence too short or too long
+            return  # clap sequence too short or too long
 
     def wrap_around(self, index):
         return index % self.buffer_size

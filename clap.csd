@@ -13,7 +13,10 @@ pyinit
 
 instr 1
 	pyruni "from clap import ClapAnalyzer"
-	pyruni "clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2], deviation_threshold=0.03)"
+	pyruni "clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2], deviation_threshold=0.05)"
+	pyruni "def clap_detected(): print 'Matching clap sequence detected!'"
+	pyruni "clap_analyzer.on_clap(clap_detected)"
+	
 	kLastRms init 0
 	kLastAttack init 0
 	iRmsDiffThreshold init .1
@@ -37,7 +40,7 @@ instr 1
 	if (kRmsDiff > iRmsDiffThreshold && kTime - kLastAttack > 0.09) then
 		kLastAttack times
 		;pyrun "clap_analyzer.clap()"
-		kSequenceDetected pycall1 "clap_analyzer.clap", kLastAttack
+		pycall "clap_analyzer.clap", kLastAttack
 	endif
 
 	out aNorm
