@@ -12,7 +12,8 @@ nchnls = 1
 pyinit
 
 instr 1
-	pyruni "import time"
+	pyruni "from clap import ClapAnalyzer"
+	pyruni "clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2], deviation_threshold=0.03)"
 	kLastRms init 0
 	kLastAttack init 0
 	iRmsDiffThreshold init .1
@@ -28,13 +29,15 @@ instr 1
 	kSmoothRms max kSmoothRms, 0.0001
 	
 	aNorm = 0.1 * aIn / a(kSmoothRms)
+	;aNorm butterbp aNorm, 12500, 2500
 	
 	kRms rms aNorm
 	kRmsDiff = kRms - kLastRms
 	
 	if (kRmsDiff > iRmsDiffThreshold && kTime - kLastAttack > 0.09) then
 		kLastAttack times
-		pyrun "print 'clap detected', time.time()"
+		;pyrun "clap_analyzer.clap()"
+		kSequenceDetected pycall1 "clap_analyzer.clap", kLastAttack
 	endif
 
 	out aNorm
