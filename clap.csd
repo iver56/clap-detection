@@ -1,6 +1,7 @@
 <CsoundSynthesizer>
 <CsOptions>
--odac   -iadc   ;realtime audio I/O
+-iadc
+--nosound
 </CsOptions>
 <CsInstruments>
 
@@ -34,14 +35,12 @@ instr 1
 	kSmoothRms max kSmoothRms, 0.001
 	
 	aNorm = 0.1 * aIn / a(kSmoothRms)
-	;aNorm butterbp aNorm, 12500, 2500
 	
 	kRms rms aNorm
 	kRmsDiff = kRms - kLastRms
 	
 	if (kRmsDiff > iRmsDiffThreshold && kTime - kLastAttack > 0.09) then
 		kLastAttack times
-		;pyrun "clap_analyzer.clap()"
 		pycall "clap_analyzer.clap", kLastAttack
 	endif
 
@@ -51,7 +50,7 @@ endin
 </CsInstruments>
 <CsScore>
 
-i 1 0 50
+i 1 0 5000
 e
 </CsScore>
 </CsoundSynthesizer>
