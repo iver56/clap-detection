@@ -2,7 +2,7 @@ class ClapAnalyzer:
     def __init__(self, pattern, deviation_threshold=0.1):
         """
         :param pattern: Relative time between the claps in the pattern. The lowest number must be 1.
-        :param deviation_threshold: How much deviation from the pattern should be allowed
+        :param deviation_threshold: How much deviation from the pattern should be considered failure
         :return:
         """
         self.buffer_size = len(pattern) + 1
@@ -24,14 +24,14 @@ class ClapAnalyzer:
 
     def clap(self, time):
         """
-        Let the ClapAnalyzer know that a clap has been detected
-        :param time: Number of seconds since the program started running. Must be float.
+        Tell ClapAnalyzer that a clap has been detected at the specified time
+        :param time: Absolute time in seconds. Must be float.
         :return:
         """
         for fn in self.clap_listeners:
             fn()
 
-        self.current_index = self.wrap_around(self.current_index + 1)
+        self.current_index = (self.current_index + 1) % self.buffer_size
         self.clap_times[self.current_index] = time
 
         first_clap_in_sequence = self.clap_times[self.current_index - self.buffer_size + 1]
@@ -57,6 +57,3 @@ class ClapAnalyzer:
                 return  # clap sequence didn't match accurately enough with the pattern
         else:
             return  # clap sequence too short or too long
-
-    def wrap_around(self, index):
-        return index % self.buffer_size
