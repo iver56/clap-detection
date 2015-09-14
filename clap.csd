@@ -1,6 +1,6 @@
 <CsoundSynthesizer>
 <CsOptions>
--odac   -iadc   ;;;realtime audio I/O
+-odac   -iadc   ;realtime audio I/O
 </CsOptions>
 <CsInstruments>
 
@@ -13,7 +13,7 @@ pyinit
 
 instr 1
 	pyruni "from clap import ClapAnalyzer"
-	pyruni "clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2], deviation_threshold=0.05)"
+	pyruni "clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2])"
 	pyruni "def clap_detected(): print 'Clap detected'"
 	pyruni "def clap_sequence_detected(): print 'Matching clap sequence detected!'"
 	pyruni "clap_analyzer.on_clap(clap_detected)"

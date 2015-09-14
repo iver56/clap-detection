@@ -1,5 +1,5 @@
 class ClapAnalyzer:
-    def __init__(self, pattern, deviation_threshold=0.05):
+    def __init__(self, pattern, deviation_threshold=0.1):
         """
         :param pattern: Relative time between the claps in the pattern. The lowest number must be 1.
         :param deviation_threshold: How much deviation from the pattern should be allowed
