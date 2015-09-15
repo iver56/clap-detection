@@ -9,7 +9,7 @@ class ClapAnalyzer:
         self.pattern = pattern
         self.pattern_sum = sum(pattern)
         self.min_pattern_time = .1 * self.pattern_sum  # min 100 ms between fastest clap in sequence
-        self.max_pattern_time = .3 * self.pattern_sum  # max 300 ms between fastest clap in sequence
+        self.max_pattern_time = .5 * self.pattern_sum  # max 500 ms between fastest clap in sequence
         self.clap_times = [None] * self.buffer_size
         self.deviation_threshold = deviation_threshold
         self.current_index = 0
