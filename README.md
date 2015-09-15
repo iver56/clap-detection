@@ -60,11 +60,11 @@ pyruni "import sys, os"
 pyruni "sys.path.append('/path/to/your/directory')"
 ```
 
-Edit /path/to/your/directory to the path where clap.py is located.
+Edit `/path/to/your/directory` to the place where clap.py is located.
 
 ### "Segmentation fault" or "Unable to set number of channels on soundcard"
 
-Check if your input device is mono or stereo. If it is mono, you should have `nchnls = 1` in your csound file, and you should use the `in` opcode, not `ins`. If your input device is stereo, then you should set `nchnls = 2`.
+Check if your input device is mono or stereo. If it is mono (i.e. has only one channel), then you should set `nchnls = 1` in your csound file, and you should use the `in` opcode instead of `ins`. If your input device is stereo, then you should set `nchnls = 2`.
 
 ### ALSA and/or PortAudio warnings
 
@@ -76,4 +76,4 @@ Let Csound use a large buffer in both software and hardware. In other word, use 
 
 ### Input device error
 
-Run `arecord -l` and see check the list of sound cards and subdevices that are available. If you want to use card 1, subdevice 0, then use the following csound option: `-i adc:hw:1,0`
+Run `arecord -l` and check the list of sound cards and subdevices that are available. If you, for example, want to use card 1, subdevice 0, then you should use the following csound option: `-i adc:hw:1,0`
