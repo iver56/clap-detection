@@ -48,3 +48,32 @@ If you want to quickly analyze a wav file, you can use that file instead of live
 `csound clap.csd -i myfile.wav --nosound`
 
 PS: The file must be mono, not stereo, for this to work. And if your sound file is long, then you should modify the amount of time the Csound instrument stays alive accordingly, in order to analyze the whole file.
+
+## Troubleshooting
+
+### "no module named clap"
+
+Try adding your current directory to the python path dynamically:
+
+```
+pyruni "import sys, os"
+pyruni "sys.path.append('/path/to/your/directory')"
+```
+
+Edit /path/to/your/directory to the path where clap.py is located.
+
+### "Segmentation fault" or "Unable to set number of channels on soundcard"
+
+Check if your input device is mono or stereo. If it is mono, you should have `nchnls = 1` in your csound file, and you should use the `in` opcode, not `ins`. If your input device is stereo, then you should set `nchnls = 2`.
+
+### ALSA and/or PortAudio warnings
+
+Use the `-+rtaudio=alsa` option
+
+### Stuttering/crackling/noise
+
+Let Csound use a large buffer in both software and hardware. In other word, use the following options: `-b2048 -B2048`
+
+### Input device error
+
+Run `arecord -l` and see check the list of sound cards and subdevices that are available. If you want to use card 1, subdevice 0, then use the following csound option: `-i adc:hw:1,0`
