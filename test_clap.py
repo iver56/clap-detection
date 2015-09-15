@@ -5,11 +5,11 @@ from clap import ClapAnalyzer
 class TestClapAnalyzer(unittest.TestCase):
     def setUp(self):
         self.clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2], deviation_threshold=0.05)
-        self.clap_analyzer.on_clap(self.clap_callback)
-        self.num_claps_detected = 0
+        self.clap_analyzer.on_clap_sequence(self.clap_sequence_callback)
+        self.num_clap_sequences_detected = 0
 
-    def clap_callback(self):
-        self.num_claps_detected += 1
+    def clap_sequence_callback(self):
+        self.num_clap_sequences_detected += 1
         return None
 
     def test_scenario1(self):
@@ -17,26 +17,26 @@ class TestClapAnalyzer(unittest.TestCase):
         self.clap_analyzer.clap(0.660)
         self.clap_analyzer.clap(0.796)
         self.clap_analyzer.clap(0.905)
-        self.assertEquals(self.num_claps_detected, 0)
+        self.assertEquals(self.num_clap_sequences_detected, 0)
         self.clap_analyzer.clap(1.155)
-        self.assertEquals(self.num_claps_detected, 1)
+        self.assertEquals(self.num_clap_sequences_detected, 1)
 
     def test_scenario2(self):
         self.clap_analyzer.clap(0.617)
         self.clap_analyzer.clap(0.984)
         self.clap_analyzer.clap(1.163)
         self.clap_analyzer.clap(1.355)
-        self.assertEquals(self.num_claps_detected, 0)
+        self.assertEquals(self.num_clap_sequences_detected, 0)
         self.clap_analyzer.clap(1.724)
-        self.assertEquals(self.num_claps_detected, 1)
+        self.assertEquals(self.num_clap_sequences_detected, 1)
 
         self.clap_analyzer.clap(2.899)
         self.clap_analyzer.clap(3.224)
         self.clap_analyzer.clap(3.416)
         self.clap_analyzer.clap(3.608)
-        self.assertEquals(self.num_claps_detected, 1)
+        self.assertEquals(self.num_clap_sequences_detected, 1)
         self.clap_analyzer.clap(3.967)
-        self.assertEquals(self.num_claps_detected, 2)
+        self.assertEquals(self.num_clap_sequences_detected, 2)
 
         self.clap_analyzer.clap(4.645)
         self.clap_analyzer.clap(5.016)
@@ -59,7 +59,7 @@ class TestClapAnalyzer(unittest.TestCase):
         self.clap_analyzer.clap(5.114)
         self.clap_analyzer.clap(5.511)
 
-        self.assertEquals(self.num_claps_detected, 0)
+        self.assertEquals(self.num_clap_sequences_detected, 0)
 
 
 if __name__ == '__main__':
