@@ -41,11 +41,11 @@ clap_analyzer.on_clap(clap_detected)
 
 Start csound from your command line. By default, the csound instrument will get live audio input:
 
-`csound clap.csd --nosound`
+`csound clap.csd`
 
 If you want to quickly analyze a wav file, you can use that file instead of live audio input. This is good for testing:
 
-`csound clap.csd -i myfile.wav --nosound`
+`csound clap.csd -i myfile.wav`
 
 PS: The file must be mono, not stereo, for this to work. And if your sound file is long, then you should modify the amount of time the Csound instrument stays alive accordingly, in order to analyze the whole file.
 
