@@ -1,5 +1,5 @@
 # clap-detection
-Clap sequence detection on Raspberry Pi using Csound and Python
+Clap sequence/rhythm/pattern detection on Raspberry Pi using Csound and Python
 
 ## Why
 
@@ -18,7 +18,7 @@ Csound takes in audio from a microphone live and checks the audio for transients
 
 ### Python
 
-For example, let's use the following rhythmic sequence as example:
+Let's use the following rhythmic sequence as example:
 
 ![clap](https://cloud.githubusercontent.com/assets/1470603/9700905/a6de8d6a-5415-11e5-81f6-f81e4034a939.png)
 
