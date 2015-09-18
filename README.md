@@ -70,7 +70,7 @@ Check if your input device is mono or stereo. If it is mono (i.e. has only one c
 
 Use the `-+rtaudio=alsa` option
 
-### Stuttering/crackling/noise
+### Stuttering/crackling/noise/"Buffer underrun"
 
 Let Csound use a large buffer in both software and hardware. In other word, use the following options: `-b2048 -B2048`
 
