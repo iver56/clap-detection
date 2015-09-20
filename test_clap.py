@@ -4,7 +4,10 @@ from clap import ClapAnalyzer
 
 class TestClapAnalyzer(unittest.TestCase):
     def setUp(self):
-        self.clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2], deviation_threshold=0.05)
+        self.clap_analyzer = ClapAnalyzer(
+            note_lengths=[1./4, 1./8, 1./8, 1./4, 1./4],
+            deviation_threshold=0.1
+        )
         self.clap_analyzer.on_clap_sequence(self.clap_sequence_callback)
         self.num_clap_sequences_detected = 0
 

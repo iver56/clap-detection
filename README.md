@@ -22,12 +22,12 @@ Let's use the following rhythmic sequence as example:
 
 ![clap](https://cloud.githubusercontent.com/assets/1470603/9700905/a6de8d6a-5415-11e5-81f6-f81e4034a939.png)
 
-In this sequence, the time between the first and the second clap is twice the time between the second and the third clap. You get it. Hence the relative times between the claps are [2, 1, 1, 2], and this is what we set our `pattern` variable to. The smallest number in the pattern should be 1.
+The note lengths are 1/4, 1/8, 1/8, 1/4, 1/4, so we set the `note_lengths` parameter to [0.25, 0.125, 0.125, 0.25, 0.25].
 
 ```python
 from clap import ClapAnalyzer
 
-clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2])
+clap_analyzer = ClapAnalyzer(note_lengths=[0.25, 0.125, 0.125, 0.25, 0.25])
 
 def clap_detected():
   print 'Matching clap sequence detected!'

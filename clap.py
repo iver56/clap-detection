@@ -1,13 +1,13 @@
 class ClapAnalyzer:
-    def __init__(self, pattern, deviation_threshold=0.1):
+    def __init__(self, note_lengths, deviation_threshold=0.1):
         """
-        :param pattern: Relative time between the claps in the pattern. The lowest number must be 1.
+        :param note_lengths: Relative note lengths in the rhythmic pattern. F.ex. [2, 1, 1, 2, 2]
         :param deviation_threshold: How much deviation from the pattern should be considered failure
         :return:
         """
-        self.buffer_size = len(pattern) + 1
-        self.pattern = pattern
-        self.pattern_sum = sum(pattern)
+        self.buffer_size = len(note_lengths)
+        self.pattern = self.note_lengths_to_normalized_pauses(note_lengths)
+        self.pattern_sum = sum(self.pattern)
         self.min_pattern_time = .1 * self.pattern_sum  # min 100 ms between fastest clap in sequence
         self.max_pattern_time = .5 * self.pattern_sum  # max 500 ms between fastest clap in sequence
         self.clap_times = [None] * self.buffer_size
@@ -15,6 +15,12 @@ class ClapAnalyzer:
         self.current_index = 0
         self.clap_listeners = set()
         self.clap_sequence_listeners = set()
+
+    @staticmethod
+    def note_lengths_to_normalized_pauses(note_lengths):
+        note_lengths.pop()  # Because the length of the last note doesn't matter
+        min_note_length = float(min(note_lengths))
+        return map(lambda x: x / min_note_length, note_lengths)
 
     def on_clap(self, fn):
         self.clap_listeners.add(fn)

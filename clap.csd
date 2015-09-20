@@ -14,7 +14,7 @@ pyinit
 
 instr 1
 	pyruni "from clap import ClapAnalyzer"
-	pyruni "clap_analyzer = ClapAnalyzer(pattern=[2, 1, 1, 2])"
+	pyruni "clap_analyzer = ClapAnalyzer(note_lengths=[0.25, 0.125, 0.125, 0.25, 0.25])"
 	pyruni "def clap_detected(): print 'Clap detected'"
 	pyruni "def clap_sequence_detected(): print 'Matching clap sequence detected!'"
 	pyruni "clap_analyzer.on_clap(clap_detected)"
