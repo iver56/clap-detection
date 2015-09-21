@@ -16,9 +16,9 @@ instr 1
 
 pyruni {{
 import os, sys
-from clap import ClapAnalyzer
-
 sys.path.append(os.getcwd())
+
+from clap import ClapAnalyzer
 clap_analyzer = ClapAnalyzer(note_lengths=[0.25, 0.125, 0.125, 0.25, 0.25])
 
 def clap_detected():
