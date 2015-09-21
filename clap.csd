@@ -13,6 +13,8 @@ nchnls = 1
 pyinit
 
 instr 1
+	pyruni "import os, sys"
+	pyruni "sys.path.append(os.getcwd())"
 	pyruni "from clap import ClapAnalyzer"
 	pyruni "clap_analyzer = ClapAnalyzer(note_lengths=[0.25, 0.125, 0.125, 0.25, 0.25])"
 	pyruni "def clap_detected(): print 'Clap detected'"

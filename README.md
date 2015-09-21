@@ -51,17 +51,6 @@ PS: The file must be mono, not stereo, for this to work. And if your sound file 
 
 ## Troubleshooting
 
-### "no module named clap"
-
-Try adding your current directory to the python path dynamically:
-
-```
-pyruni "import sys, os"
-pyruni "sys.path.append('/path/to/your/directory')"
-```
-
-Edit `/path/to/your/directory` to the place where clap.py is located.
-
 ### "Segmentation fault" or "Unable to set number of channels on soundcard"
 
 Check if your input device is mono or stereo. If it is mono (i.e. has only one channel), then you should set `nchnls = 1` in your csound file, and you should use the `in` opcode instead of `ins`. If your input device is stereo, then you should set `nchnls = 2`.
