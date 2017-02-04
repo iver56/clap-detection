@@ -29,13 +29,15 @@ from clap import ClapAnalyzer
 
 clap_analyzer = ClapAnalyzer(note_lengths=[0.25, 0.125, 0.125, 0.25, 0.25])
 
-def clap_detected():
+def clap_sequence_detected():
   print 'Matching clap sequence detected!'
 
-clap_analyzer.on_clap(clap_detected)
+clap_analyzer.on_clap_sequence(clap_sequence_detected)
 
 # You can now start calling clap_analyzer.clap(time)
 ```
+
+Basically, this is the python code that is used in `clap.csd`
 
 ### Csound
 
