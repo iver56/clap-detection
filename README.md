@@ -14,6 +14,11 @@ Some examples of things you can have your Raspberry Pi do when a matching clap s
 
 Csound takes in audio from a microphone live and checks the audio for transients. Whenever a transient (rapidly ascending amplitude) is detected, Csound will notice ClapAnalyzer, a class implemented in Python. ClapAnalyzer looks for a specific rhytmic clap sequence. ClapAnalyzer will notice all listeners whenever a matching clap sequence is detected.
 
+## Setup
+
+* Install Python 2.7
+* Install Csound
+
 ## Usage
 
 ### Python
