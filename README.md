@@ -1,5 +1,5 @@
 # clap-detection
-Clap sequence/rhythm/pattern detection on Raspberry Pi using Csound and Python
+Clap sequence/rhythm/pattern detection on Raspberry Pi using Csound and Python. This was made as a quick experiment. Don't use it for anything serious.
 
 ## Why
 
